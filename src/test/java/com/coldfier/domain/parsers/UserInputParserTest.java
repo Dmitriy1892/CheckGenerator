@@ -1,5 +1,7 @@
-package com.coldfier.domain;
+package com.coldfier.domain.parsers;
 
+import com.coldfier.domain.parsers.ParseResultCallback;
+import com.coldfier.domain.parsers.UserInputParser;
 import com.coldfier.utils.Pair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

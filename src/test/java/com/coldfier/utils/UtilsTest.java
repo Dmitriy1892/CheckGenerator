@@ -2,10 +2,6 @@ package com.coldfier.utils;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.util.CollectionUtils;
-
-import java.util.Collections;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class UtilsTest {
@@ -82,8 +78,69 @@ public class UtilsTest {
         int times = 5;
 
         String result = Utils.getSymbolsString(input, times);
-
         Assertions.assertEquals("11111", result);
     }
 
+    @Test
+    public void test_formatStringWithStartEndSpaces_return_correct_length() {
+        String input = "FOUR";
+        int maxWidth = 13;
+
+        String result = Utils.formatStringWithStartEndSpaces(input, maxWidth);
+        Assertions.assertEquals(maxWidth, result.length());
+    }
+
+    @Test
+    public void test_formatStringWithStartEndSpaces_return_correct() {
+        String input = "FOUR";
+        int maxWidth = 12;
+
+        String result = Utils.formatStringWithStartEndSpaces(input, maxWidth);
+        Assertions.assertEquals(
+                "    FOUR    ",
+                result
+        );
+    }
+
+    @Test
+    public void test_formatStringsWithSpaceBetween_return_correct_length() {
+        String first = "ONE";
+        String second = "TWO";
+        int maxWidth = 9;
+
+        String result = Utils.formatStringsWithSpaceBetween(first, second, maxWidth);
+
+        Assertions.assertEquals(maxWidth, result.length());
+    }
+
+    @Test
+    public void test_formatStringsWithSpaceBetween_return_correct_value() {
+        String first = "ONE";
+        String second = "TWO";
+        int maxWidth = 9;
+
+        String result = Utils.formatStringsWithSpaceBetween(first, second, maxWidth);
+
+        Assertions.assertEquals("ONE   TWO", result);
+    }
+
+    @Test
+    public void test_formatStringWithStartSpace_return_correct_length() {
+        String input = "SOME";
+        int maxWidth = 10;
+
+        String result = Utils.formatStringWithStartSpace(input, maxWidth);
+
+        Assertions.assertEquals(maxWidth, result.length());
+    }
+
+    @Test
+    public void test_formatStringWithStartSpace_return_correct_value() {
+        String input = "SOME";
+        int maxWidth = 10;
+
+        String result = Utils.formatStringWithStartSpace(input, maxWidth);
+
+        Assertions.assertEquals("      SOME", result);
+    }
 }

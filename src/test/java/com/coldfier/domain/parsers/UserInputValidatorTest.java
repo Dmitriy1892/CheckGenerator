@@ -1,5 +1,6 @@
-package com.coldfier.domain;
+package com.coldfier.domain.parsers;
 
+import com.coldfier.domain.parsers.UserInputValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

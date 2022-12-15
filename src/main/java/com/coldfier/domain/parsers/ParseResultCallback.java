@@ -1,4 +1,4 @@
-package com.coldfier.domain;
+package com.coldfier.domain.parsers;
 
 import java.util.Map;
 

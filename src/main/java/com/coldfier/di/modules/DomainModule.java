@@ -1,6 +1,6 @@
 package com.coldfier.di.modules;
 
-import com.coldfier.domain.CheckPositionFactory;
+import com.coldfier.domain.factories.CheckPositionFactory;
 import com.coldfier.domain.use_cases.GenerateCheckUseCase;
 import com.coldfier.domain.use_cases.SaveCheckUseCase;
 

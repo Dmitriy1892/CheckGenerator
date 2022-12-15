@@ -4,9 +4,11 @@ import com.coldfier.data.models.DiscountCard;
 import com.coldfier.data.models.Item;
 import com.coldfier.data.models.MerchantInfo;
 import com.coldfier.data.StorageRepository;
-import com.coldfier.domain.CheckPositionFactory;
+import com.coldfier.domain.factories.CheckPositionFactory;
 import com.coldfier.domain.models.Check;
 import com.coldfier.domain.models.check_position.CheckPosition;
+
+import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,11 +34,12 @@ public class GenerateCheckUseCase {
             Long discountCardId,
             String checkTitle,
             long cashierId
-    ) {
+    ) throws NoSuchObjectException {
         int discountCardPercentage = getDiscountCardPercentage(discountCardId);
         int vatPercentage = getVatPercentage();
 
         List<CheckPosition> checkPositions = new ArrayList<>();
+
         itemsInfo.forEach((itemId, quantity) -> {
             try {
                 Item item = getItemById(itemId);
@@ -46,6 +49,9 @@ public class GenerateCheckUseCase {
                 e.printStackTrace();
             }
         });
+
+        if (checkPositions.isEmpty())
+            throw new NoSuchObjectException("Items pairs input incorrect or items does not exist on storage");
 
         Check.Builder builder = new Check.Builder()
                 .setTitle(checkTitle)
@@ -75,7 +81,7 @@ public class GenerateCheckUseCase {
         if (item != null) {
             return item;
         } else  {
-            throw new NoSuchElementException("No item found for item cardName: " + itemId);
+            throw new NoSuchElementException("No item found for itemId: " + itemId);
         }
     }
 }

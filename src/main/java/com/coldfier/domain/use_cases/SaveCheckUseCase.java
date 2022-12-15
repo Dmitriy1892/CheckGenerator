@@ -14,7 +14,7 @@ public class SaveCheckUseCase {
 
         try {
             String fileName = "check-" + Utils.getDateTimeFromTimestamp(System.currentTimeMillis());
-            File file = new File("src/main/output/" + fileName);
+            File file = new File("src/main/output/" + fileName + ".txt");
 
             if (!file.exists()) {
                 file.createNewFile();

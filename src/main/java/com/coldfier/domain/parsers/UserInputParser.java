@@ -1,4 +1,4 @@
-package com.coldfier.domain;
+package com.coldfier.domain.parsers;
 
 import com.coldfier.utils.Pair;
 
@@ -79,7 +79,10 @@ public class UserInputParser {
         }
 
         if (!fileName.isEmpty()) {
-            parseResultCallback.onError("You cannot pass file name and items in arguments, please choose one way");
+            String errorMessage = "Invalid input. File name passed with items in arguments" +
+                    " or incorrect card data passed into arguments";
+            parseResultCallback.onError(errorMessage);
+            return;
         }
 
         if (discountCardId >= 0) {

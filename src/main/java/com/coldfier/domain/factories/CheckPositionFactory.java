@@ -1,4 +1,4 @@
-package com.coldfier.domain;
+package com.coldfier.domain.factories;
 
 import com.coldfier.data.StorageRepository;
 import com.coldfier.domain.models.check_position.CheckPosition;

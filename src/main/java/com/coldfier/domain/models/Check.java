@@ -99,8 +99,9 @@ public class Check {
                 .append(buildCheckHeader(stringMaxWidth))
                 .append(divider)
                 .append(buildCheckPositionsTable())
-                .append(divider)
-                .append(divider)
+                .append("\n")
+                .append(Utils.getSymbolsString('=', stringMaxWidth))
+                .append("\n\n")
                 .append(buildCheckTotalInfo(stringMaxWidth))
                 .append("\n")
                 .append(divider);
@@ -189,7 +190,7 @@ public class Check {
                 stringMaxWidth
         );
 
-        stringBuilder.append(vat).append("\n");
+        stringBuilder.append(vat).append("\n\n");
 
         String total = Utils.formatStringsWithSpaceBetween(
                 "TOTAL",

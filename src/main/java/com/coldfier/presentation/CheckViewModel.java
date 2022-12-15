@@ -1,13 +1,14 @@
 package com.coldfier.presentation;
 
 import com.coldfier.domain.use_cases.GenerateCheckUseCase;
-import com.coldfier.domain.ParseResultCallback;
-import com.coldfier.domain.UserInputParser;
+import com.coldfier.domain.parsers.ParseResultCallback;
+import com.coldfier.domain.parsers.UserInputParser;
 import com.coldfier.domain.models.Check;
 import com.coldfier.domain.use_cases.SaveCheckUseCase;
 import com.coldfier.utils.reactive.DefaultObservableSource;
 
 import java.io.*;
+import java.rmi.NoSuchObjectException;
 import java.util.Map;
 
 public class CheckViewModel {
@@ -84,9 +85,14 @@ public class CheckViewModel {
             Map<Long, Integer> itemsInfo,
             Long discountCardId
     ) {
-        Check check = generateCheckUseCase.generateCheck(itemsInfo, discountCardId, "CASH RECEIPT", 228L);
+        try {
+            Check check = generateCheckUseCase.generateCheck(itemsInfo, discountCardId, "CASH RECEIPT", 228L);
 
-        saveCheckUseCase.saveCheck(check);
-        checkObservable.emit(check);
+            saveCheckUseCase.saveCheck(check);
+            checkObservable.emit(check);
+        } catch (NoSuchObjectException e) {
+            errorObservable.emit(e.getMessage());
+        }
+
     }
 }

@@ -99,8 +99,7 @@ public class Utils {
     public static String formatStringWithStartSpace(String input, int requiredStringLength) {
         if (requiredStringLength <= input.length()) return input;
 
-        String space = getSymbolsString(' ', requiredStringLength - input.length() - 1);
-
+        String space = getSymbolsString(' ', requiredStringLength - input.length());
         return space + input;
     }
 }

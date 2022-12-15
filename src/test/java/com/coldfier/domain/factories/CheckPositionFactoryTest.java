@@ -1,8 +1,9 @@
-package com.coldfier.domain;
+package com.coldfier.domain.factories;
 
 import com.coldfier.data.StorageRepository;
 import com.coldfier.data.models.PromoSettings;
 import com.coldfier.data.models.Item;
+import com.coldfier.domain.factories.CheckPositionFactory;
 import com.coldfier.domain.models.check_position.CheckPosition;
 import com.coldfier.domain.models.check_position.DefaultCheckPosition;
 import com.coldfier.domain.models.check_position.PromoPosition;
