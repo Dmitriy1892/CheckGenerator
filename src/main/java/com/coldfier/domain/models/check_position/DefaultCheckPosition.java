@@ -38,6 +38,17 @@ public class DefaultCheckPosition implements CheckPosition {
 
     @Override
     public String toString() {
-        return String.format(Utils.TABLE_FORMAT, quantity, positionName, "$" + price, "$" + fullCost);
+
+        String priceStr = "$" + Utils.formatDoubleToString(price);
+        String fullCostStr = "$" + Utils.formatDoubleToString(fullCost);
+
+        return String.format(
+                Utils.TABLE_FORMAT,
+                quantity,
+                positionName,
+                Utils.formatStringWithStartSpace(priceStr, 10),
+                Utils.formatStringWithStartSpace(0 + "%", 10),
+                Utils.formatStringWithStartSpace(fullCostStr, 10)
+        );
     }
 }

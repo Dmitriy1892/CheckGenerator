@@ -1,11 +1,11 @@
 package com.coldfier.domain;
 
 import com.coldfier.data.StorageRepository;
-import com.coldfier.data.models.DiscountSettings;
+import com.coldfier.data.models.PromoSettings;
 import com.coldfier.data.models.Item;
 import com.coldfier.domain.models.check_position.CheckPosition;
 import com.coldfier.domain.models.check_position.DefaultCheckPosition;
-import com.coldfier.domain.models.check_position.DiscountPosition;
+import com.coldfier.domain.models.check_position.PromoPosition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -33,13 +33,13 @@ public class CheckPositionFactoryTest {
 
         StorageRepository storageRepository = Mockito.mock(StorageRepository.class);
         Mockito.when(storageRepository.isItemInDiscount(1L)).thenReturn(true);
-        Mockito.when(storageRepository.getDiscountSettings())
-                .thenReturn(new DiscountSettings(5, 10));
+        Mockito.when(storageRepository.getPromoSettings())
+                .thenReturn(new PromoSettings(5, 10));
 
         CheckPositionFactory checkPositionFactory = new CheckPositionFactory(storageRepository);
 
         CheckPosition createdCheckPosition = checkPositionFactory.create(item, 1);
 
-        Assertions.assertInstanceOf(DiscountPosition.class, createdCheckPosition);
+        Assertions.assertInstanceOf(PromoPosition.class, createdCheckPosition);
     }
 }

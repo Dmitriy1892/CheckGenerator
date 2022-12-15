@@ -1,7 +1,7 @@
 package com.coldfier.di.modules;
 
 import com.coldfier.data.data_sources.DiscountCardsDataSource;
-import com.coldfier.data.data_sources.DiscountSettingsDataSource;
+import com.coldfier.data.data_sources.PromoSettingsDataSource;
 import com.coldfier.data.data_sources.ItemsDataSource;
 import com.coldfier.data.data_sources.MerchantInfoDataSource;
 
@@ -11,8 +11,8 @@ public class DataSourcesModule {
         return new DiscountCardsDataSource();
     }
 
-    public DiscountSettingsDataSource provideDiscountSettingsDataSource() {
-        return new DiscountSettingsDataSource();
+    public PromoSettingsDataSource providePromoSettingsDataSource() {
+        return new PromoSettingsDataSource();
     }
 
     public ItemsDataSource provideItemsDataSource() {

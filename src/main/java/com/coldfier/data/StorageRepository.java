@@ -1,11 +1,11 @@
 package com.coldfier.data;
 
 import com.coldfier.data.data_sources.DiscountCardsDataSource;
-import com.coldfier.data.data_sources.DiscountSettingsDataSource;
+import com.coldfier.data.data_sources.PromoSettingsDataSource;
 import com.coldfier.data.data_sources.ItemsDataSource;
 import com.coldfier.data.data_sources.MerchantInfoDataSource;
 import com.coldfier.data.models.DiscountCard;
-import com.coldfier.data.models.DiscountSettings;
+import com.coldfier.data.models.PromoSettings;
 import com.coldfier.data.models.Item;
 import com.coldfier.data.models.MerchantInfo;
 
@@ -13,19 +13,19 @@ public class StorageRepository {
 
     private static final Object SYNC_OBJECT = new Object();
     private static volatile StorageRepository INSTANCE;
-    private final DiscountSettingsDataSource discountSettingsDataSource;
+    private final PromoSettingsDataSource promoSettingsDataSource;
     private final DiscountCardsDataSource discountCardsDataSource;
     private final ItemsDataSource itemsDataSource;
     private final MerchantInfoDataSource merchantInfoDataSource;
     private final int vatPercentage;
 
     private StorageRepository(
-            DiscountSettingsDataSource discountSettingsDataSource,
+            PromoSettingsDataSource promoSettingsDataSource,
             DiscountCardsDataSource discountCardsDataSource,
             ItemsDataSource itemsDataSource,
             MerchantInfoDataSource merchantInfoDataSource
     ) {
-        this.discountSettingsDataSource = discountSettingsDataSource;
+        this.promoSettingsDataSource = promoSettingsDataSource;
         this.discountCardsDataSource = discountCardsDataSource;
         this.itemsDataSource = itemsDataSource;
         this.merchantInfoDataSource = merchantInfoDataSource;
@@ -33,7 +33,7 @@ public class StorageRepository {
     }
 
     public static StorageRepository getInstance(
-            DiscountSettingsDataSource discountSettingsDataSource,
+            PromoSettingsDataSource promoSettingsDataSource,
             DiscountCardsDataSource discountCardsDataSource,
             ItemsDataSource itemsDataSource,
             MerchantInfoDataSource merchantInfoDataSource
@@ -42,7 +42,7 @@ public class StorageRepository {
             synchronized (SYNC_OBJECT) {
                 if (INSTANCE == null) {
                     INSTANCE = new StorageRepository(
-                            discountSettingsDataSource,
+                            promoSettingsDataSource,
                             discountCardsDataSource,
                             itemsDataSource,
                             merchantInfoDataSource
@@ -60,8 +60,8 @@ public class StorageRepository {
         return merchantInfoDataSource.getMerchantInfo();
     }
 
-    public DiscountSettings getDiscountSettings() {
-        return discountSettingsDataSource.getDiscountSettings();
+    public PromoSettings getPromoSettings() {
+        return promoSettingsDataSource.getPromoSettings();
     }
 
     /**

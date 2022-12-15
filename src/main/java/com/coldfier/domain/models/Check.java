@@ -89,18 +89,37 @@ public class Check {
     @Override
     public String toString() {
 
-        int stringMaxWidth = 51;
+        int stringMaxWidth = 66; // THIS VALUE DEPENDS ON Utils.TABLE_FORMAT - IT MUST BE EQUALS TABLE ROW LENGTH
 
         String divider = Utils.getSymbolsString('-', stringMaxWidth) + "\n";
 
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(divider)
-                .append(Utils.formatStringWithMaxWidth(title, stringMaxWidth))
-                .append(Utils.formatStringWithMaxWidth(merchantName, stringMaxWidth))
-                .append(Utils.formatStringWithMaxWidth(address, stringMaxWidth))
-                .append(Utils.formatStringWithMaxWidth("Tel: " + phone, stringMaxWidth))
-                .append("\n");
+                .append(buildCheckHeader(stringMaxWidth))
+                .append(divider)
+                .append(buildCheckPositionsTable())
+                .append(divider)
+                .append(divider)
+                .append(buildCheckTotalInfo(stringMaxWidth))
+                .append("\n")
+                .append(divider);
+
+        return stringBuilder.toString();
+    }
+
+    protected String buildCheckHeader(int stringMaxWidth) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder
+                .append(Utils.formatStringWithStartEndSpaces(title, stringMaxWidth))
+                .append("\n")
+                .append(Utils.formatStringWithStartEndSpaces(merchantName, stringMaxWidth))
+                .append("\n")
+                .append(Utils.formatStringWithStartEndSpaces(address, stringMaxWidth))
+                .append("\n")
+                .append(Utils.formatStringWithStartEndSpaces("Tel: " + phone, stringMaxWidth))
+                .append("\n\n");
 
         String date = Utils.formatStringsWithSpaceBetween(
                 "CASHIER: No" + cashierId,
@@ -108,7 +127,7 @@ public class Check {
                 stringMaxWidth
         );
 
-        stringBuilder.append(date);
+        stringBuilder.append(date).append("\n");
 
         String time = Utils.formatStringsWithSpaceBetween(
                 "",
@@ -116,14 +135,21 @@ public class Check {
                 stringMaxWidth
         ).substring(2);
 
-        stringBuilder.append(time).append(divider);
+        stringBuilder.append(time)
+                .append("\n");
 
+        return stringBuilder.toString();
+    }
+
+    protected String buildCheckPositionsTable() {
+        StringBuilder stringBuilder = new StringBuilder();
         String tableHeader = String.format(
                 Utils.TABLE_FORMAT,
                 "QTY",
                 "DESCRIPTION",
-                "PRICE",
-                "TOTAL"
+                Utils.formatStringWithStartEndSpaces("PRICE", 10),
+                Utils.formatStringWithStartEndSpaces("PROMO", 10),
+                Utils.formatStringWithStartEndSpaces("TOTAL", 10)
         ) + "\n";
 
         stringBuilder.append(tableHeader);
@@ -133,34 +159,45 @@ public class Check {
                     .append("\n");
         }
 
-        stringBuilder.append(divider)
-                .append(divider);
+        return stringBuilder.toString();
+    }
+
+    protected String buildCheckTotalInfo(int stringMaxWidth) {
+        StringBuilder stringBuilder = new StringBuilder();
 
         String taxable = Utils.formatStringsWithSpaceBetween(
                 "TAXABLE TOT.",
-                "$" + costWithoutVat,
+                "$" + Utils.formatDoubleToString(costWithoutVat),
                 stringMaxWidth
         );
 
-        stringBuilder.append(taxable);
+        stringBuilder.append(taxable).append("\n");
+
+        if (cardDiscountPercentage > 0) {
+            String discount = Utils.formatStringsWithSpaceBetween(
+                    "CARD DISCOUNT " + cardDiscountPercentage + "%",
+                    "-$" + Utils.formatDoubleToString(cardDiscountCost),
+                    stringMaxWidth
+            );
+
+            stringBuilder.append(discount).append("\n");
+        }
 
         String vat = Utils.formatStringsWithSpaceBetween(
-                "VAT" + vatPercentage + "%",
-                "$" + vatCost,
+                "VAT " + vatPercentage + "%",
+                "$" + Utils.formatDoubleToString(vatCost),
                 stringMaxWidth
         );
 
-        stringBuilder.append(vat);
+        stringBuilder.append(vat).append("\n");
 
         String total = Utils.formatStringsWithSpaceBetween(
                 "TOTAL",
-                "$" + totalCost,
+                "$" + Utils.formatDoubleToString(totalCost),
                 stringMaxWidth
         );
 
-        stringBuilder.append(total)
-                .append("\n")
-                .append(divider);
+        stringBuilder.append(total).append("\n");
 
         return stringBuilder.toString();
     }

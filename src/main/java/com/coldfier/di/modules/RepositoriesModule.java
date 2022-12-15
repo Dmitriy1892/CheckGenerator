@@ -8,7 +8,7 @@ public class RepositoriesModule {
 
     public StorageRepository provideStorageRepository() {
         return StorageRepository.getInstance(
-                dataSourcesModule.provideDiscountSettingsDataSource(),
+                dataSourcesModule.providePromoSettingsDataSource(),
                 dataSourcesModule.provideDiscountCardsDataSource(),
                 dataSourcesModule.provideItemsDataSource(),
                 dataSourcesModule.provideMerchantInfoDataSource()
