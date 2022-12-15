@@ -45,9 +45,7 @@ public class GenerateCheckUseCase {
                 Item item = getItemById(itemId);
                 CheckPosition checkPosition = checkPositionFactory.create(item, quantity);
                 checkPositions.add(checkPosition);
-            } catch (NoSuchElementException e) {
-                e.printStackTrace();
-            }
+            } catch (NoSuchElementException ignored) {}
         });
 
         if (checkPositions.isEmpty())

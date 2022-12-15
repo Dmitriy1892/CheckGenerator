@@ -25,8 +25,7 @@ public class SaveCheckUseCase {
             bos.write(check.toString().getBytes(StandardCharsets.UTF_8));
             bos.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         } finally {
             try {
                 if (bos != null) bos.close();

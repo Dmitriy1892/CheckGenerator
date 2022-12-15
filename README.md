@@ -17,7 +17,7 @@ Start programm with arguments, you can pass in arguments the next data:
 - for itemId-quantity with\without discount card console input looks like: "1-3 4-2 5-7" or "3-5 4-1 card-1234";
 - for file name input looks like: "fileRequest.txt".
 
->**Warning**: Data in file must contains only one row (another rows won't be read) and it should look in the format for console input, which was described above. File must be located in "src/main/resources" directory.
+>**Warning**: Data in file must contain only one row (another rows won't be read) and it should look in the format for console input, which was described above. File must be located in "src/main/resources" directory.
 
 >**Warning**: You must input one of (itemId-quantity with\without discount card) or (file name). If you use both variants in the same time, programm will not generate check and will show error message for user.
 

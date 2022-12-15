@@ -67,7 +67,7 @@ public class CheckViewModel {
 
             receiveInput(inputArray);
         } catch (FileNotFoundException e) {
-            errorObservable.emit("File with file name " + fileName + " not found");
+            errorObservable.emit("File with file name \"" + fileName + "\" not found");
         } catch (IOException e) {
             errorObservable.emit("Error is occurred in file reading process. Please check the file data");
         } finally {
